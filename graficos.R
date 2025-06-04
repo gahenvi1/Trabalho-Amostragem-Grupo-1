@@ -147,7 +147,7 @@ graf1 <- dados_graf_eletrico_e_hibrido %>%
   geom_bar(stat = "identity", position = "dodge", width = 0.6, color = "black") +  # Barras
   geom_errorbar(
     aes(
-      ymin = p - erro_amostral,  # Definir o intervalo inferior
+      ymin = ifelse(p - erro_amostral < 0, 0, p - erro_amostral),  # Definir o intervalo inferior
       ymax = p + erro_amostral   # Definir o intervalo superior
     ),
     width = 0.2,
@@ -179,7 +179,7 @@ graf2 <- dados_graf_eletrico_e_hibrido %>%
   geom_bar(stat = "identity", position = "dodge", width = 0.6, color = "black") +  # Barras
   geom_errorbar(
     aes(
-      ymin = p - erro_amostral,  # Definir o intervalo inferior
+      ymin = ifelse(p - erro_amostral < 0, 0, p - erro_amostral),  # Definir o intervalo inferior
       ymax = p + erro_amostral   # Definir o intervalo superior
     ),
     width = 0.2,
@@ -210,7 +210,7 @@ graf3 <- dados_graf_eletrico_e_hibrido %>%
   geom_bar(stat = "identity", position = "dodge", width = 0.6, color = "black") +  # Barras
   geom_errorbar(
     aes(
-      ymin = p - erro_amostral,  # Definir o intervalo inferior
+      ymin = ifelse(p - erro_amostral < 0, 0, p - erro_amostral),  # Definir o intervalo inferior
       ymax = p + erro_amostral   # Definir o intervalo superior
     ),
     width = 0.2,
@@ -241,7 +241,7 @@ graf4 <- dados_graf_eletrico_e_hibrido %>%
   geom_bar(stat = "identity", position = "dodge", width = 0.6, color = "black") +  # Barras
   geom_errorbar(
     aes(
-      ymin = p - erro_amostral,  # Definir o intervalo inferior
+      ymin = ifelse(p - erro_amostral < 0, 0, p - erro_amostral),  # Definir o intervalo inferior
       ymax = p + erro_amostral   # Definir o intervalo superior
     ),
     width = 0.2,
@@ -262,7 +262,7 @@ ggsave("barras_proporcao_eletricos_hibridos.png", arrangeGrob(graf1, graf2, graf
 
 
 
-print_quadro_resumo(dados %>% group_by(`Técnica de Amostragem`), var_name = `Valor Venal`)
+#print_quadro_resumo(dados %>% group_by(`Técnica de Amostragem`), var_name = `Valor Venal`)
 
 
 a<- dados %>% group_by(`Técnica de Amostragem`) %>%
@@ -329,7 +329,7 @@ a<- dados %>%
          z = qnorm(0.975),
          s2 = 0.25,
          erro_amostral = z*sqrt((1-f)*s2/(n-1)),
-         lim_inf = p - erro_amostral,
+         lim_inf = ifelse(p - erro_amostral < 0, 0, p - erro_amostral),
          lim_sup = p + erro_amostral)
 
 a$`Técnica de Amostragem` <- factor(a$`Técnica de Amostragem`, 
