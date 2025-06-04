@@ -279,7 +279,7 @@ a$`Técnica de Amostragem` <- factor(a$`Técnica de Amostragem`,
                                     levels = c("AAS_1", "SIS_1", "AAS_2", "SIS_2"),
                                     labels = c("Simples - 1", "Sistemática - 1", "Simples - 2", "Sistemática - 2"))
 
-  
+
 
 graf_a <- a %>%
   ggplot(aes(x = `Técnica de Amostragem`, color = `Técnica de Amostragem`)) +
@@ -314,7 +314,7 @@ graf_a <- a %>%
   labs(y = "Intervalo de Confiança da Média do Valor Venal") +
   guides(color = "none")+
   scale_x_discrete(limits = c("Simples - 1", "Sistemática - 1", "Simples - 2", "Sistemática - 2"))
-  #coord_flip()
+#coord_flip()
 
 ggsave("intervalos_conf_media_valor_venal.png", graf_a,
        width = 200, height = 150, units = "mm")
